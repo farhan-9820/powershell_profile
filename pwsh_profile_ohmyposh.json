@@ -1,0 +1,512 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "blocks": [
+      {
+        "segments": [
+          {
+            "foreground": "#007ACC",
+            "template": " {{ .CurrentDate | date .Format }} ",
+            "properties": {
+              "time_format": "03:04:05 PM"
+            },
+            "style": "plain",
+            "type": "time"
+          },
+          {
+            "type": "upgrade",
+            "style": "plain",
+            "foreground": "#111111",
+            "background": "#FFD664",
+            "properties": {
+              "cache_duration": "168h"
+            }
+          }, 
+  
+         {
+            "type": "battery",
+            "style": "powerline",
+            "invert_powerline": true,
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#8f43f3",
+            "properties": {
+              "discharging_icon": "<#ffa500>-</> ",
+              "charging_icon": "+ ",
+              "charged_icon": "* "
+            }
+          },
+         
+          {
+              "type": "sysinfo",
+              "powerline_symbol": "",
+              "foreground": "#ffffff",
+              "background": "#8f43f3",
+              "template": "  {{ round .PhysicalPercentUsed .Precision }}% ",
+              "properties": {
+                "precision": 2
+              },
+              "style": "powerline"
+          },
+          {
+            "background": "#1BD760",
+            "foreground": "#111111",
+            "invert_powerline": true,
+            "powerline_symbol": "\ue0b2",
+            "properties": {
+              "paused_icon": "\uf04c ",
+              "playing_icon": "\uf04b "
+            },
+            "style": "powerline",
+            "template": " \uf167 {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} ",
+            "type": "ytm"
+          },
+          
+          {
+              "type": "shell",
+              "style": "powerline",
+              "powerline_symbol": "",
+              "foreground": "#ffffff",
+              "background": "#0077c2",
+              "properties": {
+                "mapped_shell_names": {
+                  "pwsh": "PS"
+                }
+              }
+          }
+        ],
+        "type": "rprompt"
+      },
+      {
+        "alignment": "left",
+        "newline": true,
+        "segments": [
+          {
+            "background": "#ffb300",
+            "foreground": "#ffffff",
+            "leading_diamond": "",
+            "template": " {{ .UserName }} ",
+            "style": "diamond",
+            "trailing_diamond": "",
+            "type": "session"
+          },
+          {
+            "type": "os",
+            "style": "plain",
+            "foreground": "#26C6DA",
+            "background": "#546E7A",
+            "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+            "properties": {
+              "macos": "mac"
+            }
+          },
+          {
+            "background": "#843e38",
+            "foreground": "#ffffff",
+            "powerline_symbol": "\ue0b0",
+            "properties": {
+              "folder_icon": "\uf115",
+              "folder_separator_icon": "\\",
+              "home_icon": "\ueb06",
+              "style": "full"
+            },
+            "style": "powerline",
+            "template": " <#000>\uf07b \uea9c</> {{ .Path }} ",
+            "type": "path"
+          },
+          {
+            "type": "git",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "background_templates": [
+              "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
+              "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
+              "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+              "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+            ],
+            "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
+            "properties": {
+              "fetch_status": true,
+              "fetch_upstream_icon": true,
+              "untracked_modes": {
+                "/Users/user/Projects/oh-my-posh/": "no"
+              },
+              "source": "cli",
+              "mapped_branches": {
+                "feat/*": "🚀 ",
+                "bug/*": "🐛 "
+              }
+            }
+          },
+          {
+            "type": "mercurial",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "properties": {
+              "newprop": ""
+            }
+          },
+          {
+            "type": "plastic",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "background_templates": [
+              "{{ if .MergePending }}#006060{{ end }}",
+              "{{ if .Changed }}#FF9248{{ end }}",
+              "{{ if and .Changed .Behind }}#ff4500{{ end }}",
+              "{{ if .Behind }}#B388FF{{ end }}"
+            ],
+            "template": "{{ .Selector }}{{ if .Status.Changed }}  {{ end }}{{ .Status.String }}",
+            "properties": {
+              "fetch_status": true
+            }
+          },
+          {
+            "type": "sapling",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#4C9642",
+            "background_templates": [
+              "{{ if .Bookmark }}#4C9642{{ end }}"
+            ],
+            "properties": {
+              "fetch_status": true
+            }
+          },
+          {
+            "type": "svn",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "properties": {
+              "fetch_status": true
+            }
+          },
+          {
+            "type": "text",
+            "style": "powerline",
+            "template": "{{ if .Env.DEBUG_MESSAGE }} DEBUG: {{ .Env.DEBUG_MESSAGE }} {{ end }}",
+            "foreground": "#ff0000",
+            "background": "#ffffff"
+          },
+          {
+            "background": "#00897b",
+            "background_templates": [
+              "{{ if gt .Code 0 }}#e91e63{{ end }}"
+            ],
+            "foreground": "#ffffff",
+            "template": "<parentBackground>  ",
+            "properties": {
+              "always_enabled": true
+            },
+            "style": "diamond",
+            "trailing_diamond": "",
+            "type": "status"
+          },
+          {
+            "type": "angular",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#1976d2",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "docker",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#0B59E7",
+            "template": "  {{ .Context }} "
+          },
+          {
+            "type": "firebase",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#FFA000",
+            "template": " 󰥧 {{ .Project }}"
+          },
+          {
+            "type": "gitversion",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#3a579b",
+            "template": "  {{ .MajorMinorPatch }} "
+          },
+          {
+            "type": "kubectl",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#ebcc34",
+            "template": " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+            "properties": {
+              "context_aliases": {
+                "arn:aws:eks:eu-west-1:1234567890:cluster/posh": "posh"
+              }
+            }
+          },
+          {
+            "type": "mvn",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#FFFFFF",
+            "background": "#2E2A65",
+            "template": " Maven {{ .Full }} "
+          },
+          {
+            "type": "npm",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "template": " {{ .Full }} "
+          },
+          {
+            "type": "react",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#81a1c1",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "aws",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#FFA400",
+            "template": "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
+          },
+          {
+            "type": "az",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#9ec3f0",
+            "template": "  {{ .EnvironmentName }}",
+            "properties": {
+              "source": "pwsh"
+            }
+          },
+          {
+            "type": "azd",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#9ec3f0",
+            "template": "  {{ .DefaultEnvironment }} "
+          },
+          {
+            "type": "azfunc",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#FEAC19",
+            "template": "  {{ .Full }} ",
+            "properties": {
+              "fetch_version": true,
+              "display_mode": "files"
+            }
+          },
+          {
+            "background": "#a7cae1",
+            "foreground": "#100e23",
+            "powerline_symbol": "",
+            "template": "  cds {{ .Full }} ",
+            "style": "powerline",
+            "type": "cds"
+          },
+          {
+            "background": "#a7cae1",
+            "foreground": "#100e23",
+            "powerline_symbol": "",
+            "template": "  cf {{ .Full }} ",
+            "style": "powerline",
+            "type": "cf"
+          },
+          {
+            "background": "#a7cae1",
+            "foreground": "#100e23",
+            "powerline_symbol": "",
+            "template": "  {{ .Org }}/{{ .Space }} ",
+            "style": "powerline",
+            "type": "cftarget"
+          },
+          {
+            "type": "gcp",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#47888d",
+            "template": "  {{.Project}} :: {{.Account}} "
+          },
+          {
+            "type": "dotnet",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#000000",
+            "background": "#00ffff",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "fortran",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#422251",
+            "template": " 󱈚 {{ .Full }} "
+          },
+          {
+            "type": "go",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#7FD5EA",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "haskell",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#906cff",
+            "background": "#100e23",
+            "template": "  {{ .Full }}"
+          },
+          {
+            "type": "java",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#4063D8",
+            "template": "  {{ .Full }}"
+          },
+          {
+            "type": "julia",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#4063D8",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "kotlin",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#906cff",
+            "template": " <b>K</b> {{ .Full }} "
+          },
+          {
+            "type": "lua",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "white",
+            "background": "blue",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "node",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#6CA35E",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "perl",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#4063D8",
+            "template": "  {{ .Full }}"
+          },
+          {
+            "type": "php",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#4063D8",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "python",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#100e23",
+            "background": "#906cff",
+            "template": "  {{ .Full }} "
+          },
+          {
+            "type": "r",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "blue",
+            "background": "lightWhite",
+            "template": " R {{ .Full }} "
+          },
+          {
+            "type": "ruby",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#ffffff",
+            "background": "#4063D8",
+            "template": "  {{ .Full }}"
+          },
+          {
+            "type": "rust",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#99908a",
+            "template": "  {{ .Full }} "
+          },
+
+          {
+            "type": "project",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#193549",
+            "background": "#ffeb3b",
+            "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+          },
+          {
+            "type": "root",
+            "style": "powerline",
+            "powerline_symbol": "",
+            "foreground": "#111111",
+            "background": "#ffff66",
+            "template": ""
+          },
+          {
+            "type": "text",
+            "style": "plain",
+            "foreground": "#E06C75",
+            "template": "❯"
+          },
+          {
+            "type": "upgrade",
+            "style": "plain",
+            "foreground": "#111111",
+            "background": "#FFD664",
+            "properties": {
+              "cache_duration": "168h"
+            }
+          }
+
+        ],
+        "type": "prompt"
+      }
+    ],
+    "console_title_style": "folder",
+    "final_space": true,
+    "version": 3
+  }
