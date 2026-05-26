@@ -1,2 +1,3 @@
-dont want the oh my posh? delete the Microsoft.PowerShell_profile.ps1 
-else: install oh my posh (the powerlevel 10k would be installed automatically with all the themes) 
+- dont want the oh my posh? delete the Microsoft.PowerShell_profile.ps1 
+- else: install oh my posh (the powerlevel 10k would be installed automatically with all the themes) 
+- without any profile the powershell is much faster , the default things like auto suggestion, highlight and icons are already in the folders 
