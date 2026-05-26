@@ -1,0 +1,1 @@
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\p10k-lean.omp.json" | Invoke-Expression
